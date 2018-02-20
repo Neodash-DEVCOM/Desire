@@ -1,22 +1,22 @@
-Desire Core staging tree 0.12.2.2
+Neodash Core staging tree 0.02.20.18
 
-https://www.desire-crypto.com
+https://www.neodash.net
 
-https://bitcointalk.org/index.php?topic=2272607.0
+https://bitcointalk.org/index.php?topic=
 
-What is Desire?
+What is Neodash?
 
-Desire is an experimental new digital currency that enables anonymous, instant payments to anyone, anywhere in the world. Desire uses peer-to-peer technology to operate with no central authority: managing transactions and issuing money are carried out collectively by the network. Desire Core is the name of the open source software which enables the use of this currency.
+Neodash is an experimental new digital currency that enables anonymous, instant payments to anyone, anywhere in the world. Neodash uses peer-to-peer technology to operate with no central authority: managing transactions and issuing money are carried out collectively by the network. Neodash Core is the name of the open source software which enables the use of this currency.
 
-For more information, as well as an immediately useable, binary version of the Desire Core software, see https://bitcointalk.org/index.php?topic=2272607.0.
+For more information, as well as an immediately useable, binary version of the Neodash Core software, see https://bitcointalk.org/index.php?topic=2272607.0.
 
 License
 
-Desire Core is released under the terms of the MIT license. See COPYING for more information or see https://opensource.org/licenses/MIT.
+Neodash Core is released under the terms of the MIT license. See COPYING for more information or see https://opensource.org/licenses/MIT.
 
 Development Process
 
-The master branch is meant to be stable. Development is normally done in separate branches. Tags are created to indicate new official, stable release versions of Desire Core.
+The master branch is meant to be stable. Development is normally done in separate branches. Tags are created to indicate new official, stable release versions of Neodash Core.
 
 The contribution workflow is described in CONTRIBUTING.md.
 
