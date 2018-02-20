@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[desire.qt-translation-012x]
-file_filter = src/qt/locale/desire_<lang>.ts
-source_file = src/qt/locale/desire_en.ts
+[neodash.qt-translation-012x]
+file_filter = src/qt/locale/neodash_<lang>.ts
+source_file = src/qt/locale/neodash_en.ts
 source_lang = en
