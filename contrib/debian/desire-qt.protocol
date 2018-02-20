@@ -1,6 +1,6 @@
 [Protocol]
-exec=desire-qt '%u'
-protocol=desire
+exec=neodash-qt '%u'
+protocol=neodash
 input=none
 output=none
 helper=true

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2017 The Desire Core developers
+// Copyright (c) 2017 The neodash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -52,7 +52,7 @@
 using namespace std;
 
 #if defined(NDEBUG)
-# error "Desire Core cannot be compiled without assertions."
+# error "Neodash Core cannot be compiled without assertions."
 #endif
 
 /**
@@ -1232,7 +1232,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 {
     double dDiff;
     CAmount nSubsidyBase;
-	
+
 	if (nPrevHeight == 0) {
         return 880000 * COIN;
 	}
@@ -1285,16 +1285,16 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
     int nMNPIBlock = Params().GetConsensus().nMasternodePaymentsIncreaseBlock;
     int nMNPIPeriod = Params().GetConsensus().nMasternodePaymentsIncreasePeriod;
 
-                                                                    
-    if(nHeight > nMNPIBlock)                  ret += blockValue / 20; 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 1)) ret += blockValue / 20; 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 2)) ret += blockValue / 20; 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 3)) ret += blockValue / 40; 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 4)) ret += blockValue / 40; 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 5)) ret += blockValue / 40; 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 6)) ret += blockValue / 40; 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 7)) ret += blockValue / 40; 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 9)) ret += blockValue / 40; 
+
+    if(nHeight > nMNPIBlock)                  ret += blockValue / 20;
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 1)) ret += blockValue / 20;
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 2)) ret += blockValue / 20;
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 3)) ret += blockValue / 40;
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 4)) ret += blockValue / 40;
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 5)) ret += blockValue / 40;
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 6)) ret += blockValue / 40;
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 7)) ret += blockValue / 40;
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 9)) ret += blockValue / 40;
 
     return ret;
 }
@@ -1867,7 +1867,7 @@ bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigne
 static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck() {
-    RenameThread("desire-scriptch");
+    RenameThread("neodash-scriptch");
     scriptcheckqueue.Thread();
 }
 
@@ -2219,7 +2219,7 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
     int64_t nTime3 = GetTimeMicros(); nTimeConnect += nTime3 - nTime2;
     LogPrint("bench", "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs]\n", (unsigned)block.vtx.size(), 0.001 * (nTime3 - nTime2), 0.001 * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : 0.001 * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * 0.000001);
 
-    // DESIRE : MODIFIED TO CHECK MASTERNODE PAYMENTS AND SUPERBLOCKS
+    // `NEODASH` : MODIFIED TO CHECK MASTERNODE PAYMENTS AND SUPERBLOCKS
 
     // It's possible that we simply don't have enough data and this could fail
     // (i.e. block itself could be a correct one and we need to store it),
@@ -2230,15 +2230,15 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
     CAmount blockReward = nFees + GetBlockSubsidy(pindex->pprev->nBits, pindex->pprev->nHeight, chainparams.GetConsensus());
     std::string strError = "";
     if (!IsBlockValueValid(block, pindex->nHeight, blockReward, strError)) {
-        return state.DoS(0, error("ConnectBlock(DESIRE): %s", strError), REJECT_INVALID, "bad-cb-amount");
+        return state.DoS(0, error("ConnectBlock(NEODASH): %s", strError), REJECT_INVALID, "bad-cb-amount");
     }
 
     if (!IsBlockPayeeValid(block.vtx[0], pindex->nHeight, blockReward)) {
         mapRejectedBlocks.insert(make_pair(block.GetHash(), GetTime()));
-        return state.DoS(0, error("ConnectBlock(DESIRE): couldn't find masternode or superblock payments"),
+        return state.DoS(0, error("ConnectBlock(NEODASH): couldn't find masternode or superblock payments"),
                                 REJECT_INVALID, "bad-cb-payee");
     }
-    // END DESIRE
+    // END NEODASH
 
     if (!control.Wait())
         return state.DoS(100, false);
@@ -3170,7 +3170,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
                              REJECT_INVALID, "bad-cb-multiple");
 
 
-    // DESIRE : CHECK TRANSACTIONS FOR INSTANTSEND
+    // NEODASH : CHECK TRANSACTIONS FOR INSTANTSEND
 
     if(sporkManager.IsSporkActive(SPORK_3_INSTANTSEND_BLOCK_FILTERING)) {
         // We should never accept block which conflicts with completed transaction lock,
@@ -3187,17 +3187,17 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
                     // relaying instantsend data won't help it.
                     LOCK(cs_main);
                     mapRejectedBlocks.insert(make_pair(block.GetHash(), GetTime()));
-                    return state.DoS(0, error("CheckBlock(DESIRE): transaction %s conflicts with transaction lock %s",
+                    return state.DoS(0, error("CheckBlock(NEODASH): transaction %s conflicts with transaction lock %s",
                                                 tx.GetHash().ToString(), hashLocked.ToString()),
                                      REJECT_INVALID, "conflict-tx-lock");
                 }
             }
         }
     } else {
-        LogPrintf("CheckBlock(DESIRE): spork is off, skipping transaction locking checks\n");
+        LogPrintf("CheckBlock(NEODASH): spork is off, skipping transaction locking checks\n");
     }
 
-    // END DESIRE
+    // END NEODASH
 
     // Check transactions
     BOOST_FOREACH(const CTransaction& tx, block.vtx)
@@ -3962,7 +3962,7 @@ bool LoadBlockIndex()
     return true;
 }
 
-bool InitBlockIndex(const CChainParams& chainparams) 
+bool InitBlockIndex(const CChainParams& chainparams)
 {
     LOCK(cs_main);
 

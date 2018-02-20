@@ -1,7 +1,7 @@
-Building Desire Core
+Building neodash Core
 
 After you install the usual build tools and C++ development tools,
-Desire Core also needs some build dependencies which are not always provided
+neodash Core also needs some build dependencies which are not always provided
 by default by the OS package manager
 (in particular BerkeleyDB 4.8 for building with wallet support).
 
@@ -21,10 +21,10 @@ use the autogen script to prepare the build environment.
     make
 
 Precompiled binaries are available at github, see
-https://github.com/desirepay/desire-binaries
+https://github.com/Neodash-DEVCOM/neodash-binaries
 
 Always verify the signatures and checksums.
 
-See doc/build-*.md for instructions on building desired,
+See doc/build-*.md for instructions on building neodashd,
 the intended-for-services, no-graphical-interface,
-reference implementation of Desire.
+reference implementation of neodash.

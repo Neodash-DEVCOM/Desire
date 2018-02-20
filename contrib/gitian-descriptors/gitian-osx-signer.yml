@@ -1,5 +1,5 @@
 ---
-name: "desire-dmg-signer"
+name: "neodash-dmg-signer"
 suites:
 - "trusty"
 architectures:
@@ -8,10 +8,10 @@ packages:
 - "faketime"
 reference_datetime: "2017-01-01 00:00:00"
 remotes:
-- "url": "https://github.com/desirepay/desire-detached-sigs.git"
+- "url": "https://github.com/Neodash-DEVCOM/neodash-detached-sigs.git"
   "dir": "signature"
 files:
-- "desire-osx-unsigned.tar.gz"
+- "neodash-osx-unsigned.tar.gz"
 script: |
   WRAP_DIR=$HOME/wrapped
   mkdir -p ${WRAP_DIR}
@@ -28,10 +28,10 @@ script: |
     chmod +x ${WRAP_DIR}/${prog}
   done
 
-  UNSIGNED=desire-osx-unsigned.tar.gz
-  SIGNED=desire-osx-signed.dmg
+  UNSIGNED=neodash-osx-unsigned.tar.gz
+  SIGNED=neodash-osx-signed.dmg
 
   tar -xf ${UNSIGNED}
   ./detached-sig-apply.sh ${UNSIGNED} signature/osx
-  ${WRAP_DIR}/genisoimage -no-cache-inodes -D -l -probe -V "Desire-Core" -no-pad -r -dir-mode 0755 -apple -o uncompressed.dmg signed-app
+  ${WRAP_DIR}/genisoimage -no-cache-inodes -D -l -probe -V "neodash-Core" -no-pad -r -dir-mode 0755 -apple -o uncompressed.dmg signed-app
   ${WRAP_DIR}/dmg dmg uncompressed.dmg ${OUTDIR}/${SIGNED}

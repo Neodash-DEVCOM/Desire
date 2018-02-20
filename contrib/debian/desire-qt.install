@@ -1,6 +1,6 @@
-usr/local/bin/desire-qt usr/bin
-share/pixmaps/desire32.xpm usr/share/pixmaps
-share/pixmaps/desire16.xpm usr/share/pixmaps
-share/pixmaps/desire128.png usr/share/pixmaps
-debian/desire-qt.desktop usr/share/applications
-debian/desire-qt.protocol usr/share/kde4/services/
+usr/local/bin/Neodash-qt usr/bin
+share/pixmaps/Neodash32.xpm usr/share/pixmaps
+share/pixmaps/Neodash16.xpm usr/share/pixmaps
+share/pixmaps/Neodash128.png usr/share/pixmaps
+debian/Neodash-qt.desktop usr/share/applications
+debian/Neodash-qt.protocol usr/share/kde4/services/
